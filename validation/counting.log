@@ -1,0 +1,4 @@
+PASS k=8: minimum weighted deficit 308 > 248
+PASS k=9: minimum weighted deficit 349 > 279
+PASS nonadaptive n=19, T=9: 171 > 126
+PASS nonadaptive n=28, T=10: 378 > 252

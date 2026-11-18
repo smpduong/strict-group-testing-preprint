@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying preprint; see CITATIONS.md for prior work."
+title: "Counting Reductions and Computational Evidence for Small Two-Stage Strict Group-Testing Instances"
+type: software
+authors:
+  - family-names: Duong
+    given-names: Steven Minh Phat
+version: "1.0.0"
+license: MIT
+abstract: "Curated research support package. The 19-item result is a computational candidate; the 28/29-item result is conditional on f(9)<=18. See STATUS.md."

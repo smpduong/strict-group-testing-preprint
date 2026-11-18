@@ -1,0 +1,7 @@
+RESULT n=19 T=9 k=6 q=3 designs=0 nodes=333357 checks=10205718 colour_calls=2120170 colour_nodes=18192942 max_vertices=33 time=2.02s stop_first=0 complete=1 P=1 part=0 splitd=4 split_subtrees=25018 top_nodes=4525
+ARTEFACT: search log. designs=0 is a NEGATIVE-SEARCH LOG (not an independently checkable certificate); a printed DESIGN is a candidate POSITIVE WITNESS (check it with independent/verify.py)
+STATUS: COMPLETE (exhaustive; no node limit in this solver)
+DONE n=19 k=6 q=3 pools[6,6] nodes=226207 cspcalls=877636 designs_found=0
+ARTEFACT: search log. 'designs_found=0' is a NEGATIVE-SEARCH LOG (not an independently checkable certificate); a FOUND line is a candidate POSITIVE WITNESS (dump it with `gt cert` and check it with search/verify.py)
+STATUS: COMPLETE (no node limit reached; node limit 2000000000)
+PASS: two k=6 slices only; not a complete n19 validation

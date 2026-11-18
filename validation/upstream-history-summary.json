@@ -1,0 +1,23 @@
+{
+  "repository": "smpduong/strict-group-testing",
+  "visibility": "private",
+  "branch": "main",
+  "head": "9ac7b4bfc7530719ff66e4cabe5f0ff1ddfdaec2",
+  "tree": "ad4ba917f3e0657c88c7a48502bbc1a81ae368fd",
+  "default_branch_commits": 128,
+  "root_reached": true,
+  "commits_containing_session_links": 128,
+  "commit_authors": [
+    "Steven Minh Phat Duong"
+  ],
+  "tree_entries": 1231,
+  "tracked_files": 1200,
+  "truncated": false,
+  "license_paths": [],
+  "scope": "Commit messages/metadata of default branch and complete current tree paths inspected. Historical blob contents and other refs not comprehensively audited.",
+  "branches_observed": [
+    "main"
+  ],
+  "release_count_observed": 0,
+  "tag_inventory": "not verified: endpoint unavailable"
+}

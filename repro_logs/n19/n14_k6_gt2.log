@@ -1,0 +1,5 @@
+RESULT n=14 T=8 k=6 q=2 designs=0 nodes=10915559 checks=411937093 colour_calls=260565361 colour_nodes=1392734248 max_vertices=40 time=172.78s stop_first=0 complete=1
+ARTEFACT: search log. designs=0 is a NEGATIVE-SEARCH LOG (not an independently checkable certificate); a printed DESIGN is a candidate POSITIVE WITNESS (check it with independent/verify.py)
+STATUS: COMPLETE (exhaustive; no node limit in this solver)
+exit=0
+elapsed_s=173

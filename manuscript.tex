@@ -1,0 +1,165 @@
+\pdfmapfile{+cm.map}
+\pdfmapfile{+cmextra.map}
+\pdfmapfile{+latxfont.map}
+\pdfmapfile{+symbols.map}
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue,citecolor=blue}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\title{Counting Reductions and Computational Evidence for Small Two-Stage Strict Group-Testing Instances}
+\author{Steven Minh Phat Duong\\\small Independent Researcher, Calgary, Alberta, Canada}
+\date{Preprint, 18 November 2026}
+\begin{document}\maketitle
+\begin{abstract}
+We study deterministic two-stage strict group testing with unrestricted overlapping pools and a threshold of two positive items. We present negative-set and antichain reductions, describe a computational candidate for the minimum of ten tests at 19 items, and give a complete counting implication for 28 and 29 items. The latter implication is explicitly conditional: if at most 18 items can be handled by nine tests in two stages, then both instances require eleven tests. The 19-item exhaustive-search results are reported from project records, not newly certified here. Positive-strategy witnesses, negative-search logs, and mathematical reductions are distinguished throughout. No claim of independently certified optimality or priority is made. The work is AI-assisted and has not received independent human mathematical review.
+\end{abstract}
+
+\section{Model and prior work}
+There are $n$ items and an arbitrary unknown positive set $P\subseteq[n]$. A pooled test of $Q\subseteq[n]$ returns positive exactly when $P\cap Q\ne\varnothing$. In the strict model the output must be precisely $P$ when $|P|\le2$ and the symbol $>2$ otherwise. Pools can overlap arbitrarily. All first-stage pools are fixed in advance; the entire list of second-stage pools depends only on the first-stage outcome. Let $t(n,2,2)$ be the minimum worst-case total number of tests. Define
+\[
+f(T)=\max\{n:t(n,2,2)\le T\}.
+\]
+Restricting a strategy to a subset of items preserves strictness, so $f(T)$ is monotone in the relevant sense.
+
+Damaschke, Sheikh Muhammad and Wiener~\cite{DSW} develop the strict model and constructions. Their Proposition 15 supplies upper bounds of ten tests for up to 24 items and eleven tests for up to 31 items. Grankvist~\cite{G} already establishes $t(14,2,2)=9$ and $t(20,2,2)=t(21,2,2)=10$. Reproducing those values is not a new exact-value result. The project targets $t(19,2,2)=10$ as a computational candidate; this note does not upgrade it to an independently certified theorem.
+
+\section{Two counting reductions}
+Suppose a strategy has total cost at most $T$, with $k$ first-stage pools. Pad each second stage with empty tests to $q=T-k$ tests. The signature of item $i$ is $S_i\subseteq[k]$, the indices of first-stage pools containing it. The first-stage outcome for $P$ is $W=\bigcup_{i\in P}S_i$. Write
+\[
+p(W)=|\{P\subseteq[n]:|P|=2,\ \bigcup_{i\in P}S_i=W\}|,
+\quad B_q=\binom q{\lfloor q/2\rfloor}.
+\]
+All pairs, not merely disjoint pairs, are included in $p(W)$.
+
+\begin{lemma}[Negative-set restriction]\label{neg}
+For $N\subseteq[k]$, put $I_N=\{i:S_i\cap N=\varnothing\}$. Then $|I_N|\le f(T-|N|)$. In particular, every first-stage pool of size $a$ satisfies $n-a\le f(T-1)$.
+\end{lemma}
+\begin{proof}
+Restrict all items to $I_N$. The tests indexed by $N$ are necessarily negative and can be omitted. Execute the other first-stage tests and the corresponding original second-stage tests, all intersected with $I_N$. This uses at most $T-|N|$ tests in at most two stages and gives the same transcript as the original strategy with the known negative tests restored. It therefore identifies every restricted positive set of size at most two and detects every larger one. Taking $N$ to be a singleton proves the final assertion.
+\end{proof}
+
+\begin{lemma}[Antichain bound]\label{sperner}
+For every first-stage outcome $W$, $p(W)\le B_q$. Consequently, a first-stage pool of size $a$ satisfies
+\begin{equation}\label{cap}
+H_n(a):=\binom n2-\binom{n-a}2\le2^{k-1}B_q.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Let $v(P)\subseteq[q]$ be the positive second-stage test indices for a pair $P$ with first-stage outcome $W$. If two distinct pairs $P,P'$ satisfy $v(P)\subseteq v(P')$, select $x\in P\setminus P'$. The triple $P'\cup\{x\}$ has first-stage outcome $W$, since $S_x\subseteq W$. Any second-stage pool containing $x$ meets $P$ and therefore meets $P'$ by the assumed inclusion. Thus the triple and $P'$ have identical transcripts, contradicting strictness. The sets $v(P)$ form an antichain, and Sperner's theorem gives the bound.
+
+Exactly $H_n(a)$ pairs meet a pool of size $a$. Their outcomes all contain that pool's index; there are $2^{k-1}$ such outcomes and at most $B_q$ pairs per outcome. This proves~\eqref{cap}.
+\end{proof}
+
+\section{The 19-item candidate and its unresolved evidentiary step}
+For $n=19,T=9$, the established capacity $f(8)=13$ gives $a\ge6$ by Lemma~\ref{neg}. Every first-stage pool therefore meets at least
+\[
+H_{19}(6)=\binom{19}2-\binom{13}2=93
+\]
+pairs. For $k=1,2,3,4$, the right side of~\eqref{cap} equals $70,70,80,80$, respectively. These four cases are excluded analytically. Here the capacities $f(7)=9$ and $f(8)=13$ are the established small-instance inputs summarized in~\cite{DSW,G}, not new computational claims.
+
+For $k=6$, the same argument forces every pool to have exactly six items; using $f(7)=9$ in the two-negative-pool restriction also gives pairwise pool intersections of at most two items. For $k=7,8$, pool sizes lie between six and nine. The project uses these restrictions in searches over signature multisets.
+
+The recorded results for the remaining two-stage slices are summarized below. They are recorded project results; the two $k=6$ rows were additionally reproduced during the final preparation pass, as detailed in Section 5.
+\begin{center}\small
+\begin{tabular}{ccrr}
+\toprule
+$k$&$q$&First implementation nodes&Second implementation nodes\\
+\midrule
+5&4&4,288,517&4,288,517\\
+6&3&226,207&333,357\\
+7&2&13,504,468&13,504,468\\
+8&1&32,534,044&32,534,044\\
+\bottomrule
+\end{tabular}\end{center}
+Each recorded slice is reported complete with zero feasible designs. The $k=6$ implementations use different pruning rules, so their node totals need not agree. A further second-implementation run without pool-size bounds is reported to visit 288,383,544 nodes, also with zero designs. These programs share the first-stage enumeration and symmetry scheme; separately implemented second-stage solvers do not remove that shared dependency.
+
+The one-stage cases $k=0,9$ are excluded directly by Lemma~\ref{sperner}. Regard all nine fixed tests as second-stage tests with no first stage. Then $W=\varnothing$ for every pair, so the lemma requires
+\[
+\binom{19}2=171\le B_9=\binom94=126,
+\]
+a contradiction. No separate nonadaptive-capacity premise is needed.
+
+\paragraph{What would complete the exact-value claim.}
+The analytical cases and the known upper bound reduce $t(19,2,2)=10$ to the correctness and completeness of the remaining search exclusions. A zero-design log is not an independently checkable unsatisfiability certificate. The accompanying curated archive includes the pinned source and stored n19 reproduction logs, but no fresh replay of all exhaustive slices or independently checkable unsatisfiability certificate is supplied. Only the two $k=6$ implementations were freshly rerun in the final preparation pass. Accordingly, the displayed node counts do not themselves establish the exact value. A complete public release needs pinned source and raw logs, justified symmetry and pruning, reproducible commands, completion diagnostics, and a separately scrutinized exhaustive implementation or checkable certificates.
+
+\section{A complete conditional counting result}
+The following implication does not use the project's negative searches at 26 or 27 items.
+\begin{theorem}[Explicitly conditional]\label{cond}
+Assume $f(9)\le18$. Then
+\[
+t(28,2,2)=t(29,2,2)=11.
+\]
+\end{theorem}
+\begin{proof}
+It suffices to exclude ten tests for 28 items. The construction in~\cite[Proposition 15]{DSW} gives the upper bound eleven for both sizes, and monotonicity then transfers the 28-item lower bound to 29.
+
+Let $n=28,T=10$. If $1\le k\le9$, Lemma~\ref{neg} and $f(9)\le18$ force every pool size $a_j\ge10$. Thus
+\[
+H_{28}(a_j)\ge\binom{28}2-\binom{18}2=225.
+\]
+For $k=1,\ldots,7$, the antichain caps $2^{k-1}B_{10-k}$ are $126,140,140,160,160,192,192$, all smaller than 225.
+
+It remains to consider $k=8,9$, with $B=B_{10-k}=2,1$, respectively. Define the outcome deficiency $d(W)=B-p(W)$, so $0\le d(W)\le B$. For each first-stage pool $j$, counting pairs meeting it gives
+\[
+\sum_{W:j\in W}d(W)=2^{k-1}B-H_{28}(a_j)\le256-225=31.
+\]
+Summing this inequality over pools yields
+\begin{equation}\label{weighted}
+\sum_W |W|d(W)\le31k.
+\end{equation}
+On the other hand, there are 378 pairs altogether. Hence
+\[
+\sum_{W\ne\varnothing}d(W)\ge(2^k-1)B-378.
+\]
+Under the capacity $d(W)\le B$, the smallest possible weighted sum is obtained by filling outcomes of the smallest sizes first. This follows by transferring any available deficiency from a larger outcome to a smaller unfilled one, which cannot increase the weighted sum.
+
+For $k=8$, the nonempty deficiency is at least 132. Singletons hold at most $8\cdot2=16$, doubletons at most $28\cdot2=56$, leaving 60 units at weight at least three. Thus
+\[
+\sum_W |W|d(W)\ge16+2\cdot56+3\cdot60=308>248=31\cdot8.
+\]
+For $k=9$, the nonempty deficiency is at least 133. Singletons, doubletons and triples hold at most $9,36,84$ units, leaving four at weight at least four. Thus
+\[
+\sum_W |W|d(W)\ge9+2\cdot36+3\cdot84+4\cdot4=349>279=31\cdot9.
+\]
+Both contradict~\eqref{weighted}.
+
+Finally, $k=0$ or $k=10$ is nonadaptive. Regard all ten fixed tests as second-stage tests with no first stage. Lemma~\ref{sperner} then requires
+\[
+\binom{28}2=378\le B_{10}=\binom{10}5=252,
+\]
+a contradiction. All cases are excluded.
+\end{proof}
+The hypothesis $f(9)\le18$ is equivalent to excluding a nine-test strategy at 19 items. It is precisely the unresolved computational premise discussed above. Theorem~\ref{cond} must not be quoted as an unconditional exact-value result from this draft.
+
+\section{Reproducibility and release status}
+The accompanying archive is a curated, history-free subset of the project's source repository at commit \texttt{9ac7b4bfc753} (22 October 2026). It includes the complete stored n19 reproduction folder, selected source files and regression dependencies, positive-strategy witnesses, a current evidence ledger and reproduction instructions. It is not a complete clone of the wider research project. Historical originals are preserved separately; the curated copy explicitly records its edits and exclusions.
+
+The current documentation records two historical hazards: a search node limit formerly returned infeasible instead of unknown, and an array boundary was corrected. It reports hardened reruns with unchanged outcomes. This draft does not independently certify those reruns. Incomplete, timed-out, or limit-interrupted runs cannot support exclusions.
+
+The complete bounded regression suite exited zero with no failures. It exercises node-limit handling, array boundaries, witness validity and budget checks, work-partition controls and small wide-build controls. AddressSanitizer and UndefinedBehaviorSanitizer were enabled; leak detection was disabled because of the traced validation environment. All 25 stored-log hashes and all nine historical source hashes in the n19 manifest matched the included files. These are integrity and regression checks, not proofs of enumeration completeness.
+
+Two fresh $k=6$ runs reproduced the stored zero-design verdicts: the first implementation visited 226,207 nodes with the intersection restriction, and the second visited 333,357 nodes with pool sizes fixed at six. Both reported completion. No other full n19 slice was rerun during this final pass, and agreement of these two runs does not resolve the shared reduction and enumeration assumptions.
+
+A separate arithmetic checker reproduces the weighted-deficiency minima 308 and 349 in Theorem~\ref{cond}. One transcription was corrected in the curated 28-item report: the last term for $k=8$ is $60\cdot3$ (equivalently $30\cdot2\cdot3$), not $30\cdot3$. The corrected total is 308; the conditional contradiction is unchanged.
+
+For reproduction, begin with \texttt{REPRODUCE.md} and \texttt{EVIDENCE-MAP.md} in the archive. The former separates bounded tests from costly full-slice reruns; the latter maps the table's numerical entries to exact log files and records which checks were freshly executed. A hash manifest protects the released file bytes, not their mathematical correctness.
+
+The wider project reports additional conditional candidates at 26 and 27 items. Those depend on further negative searches and are outside this note's theorem. No new value for 25 items is claimed. The manuscript and accompanying support archive form a preprint package. The availability of this package does not establish the correctness or completeness of the recorded searches.
+
+\paragraph{AI-use and limitations.}
+AI systems assisted in algorithm development, computations, mathematical checking and writing. Historical references to independent auditors refer to separate AI sessions or implementations, not independent human mathematical review. This manuscript has not been peer reviewed, no faculty endorsement is implied, and novelty remains provisional. The exact-value candidates remain subject to the computational and mathematical limitations stated above.
+
+\begin{thebibliography}{2}
+\bibitem{DSW} P. Damaschke, A. Sheikh Muhammad and G. Wiener,
+Strict group testing and the set basis problem,
+\emph{Journal of Combinatorial Theory, Series A} \textbf{126} (2014), 70--91.
+\href{https://doi.org/10.1016/j.jcta.2014.04.005}{doi:10.1016/j.jcta.2014.04.005}.
+\bibitem{G} D. Grankvist,
+\emph{Searching for Search Strategies: Solutions to Strict Group Testing Problem Instances}.
+Master's thesis, Chalmers University of Technology and University of Gothenburg, 2017.
+\href{https://odr.chalmers.se/server/api/core/bitstreams/0ce48183-ab4e-444b-8372-8da3b9d93907/content}{Institutional full text}.
+\end{thebibliography}
+\end{document}

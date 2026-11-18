@@ -1,0 +1,5 @@
+DONE n=13 k=9 q=0 nodes=647436550 designs_found=0
+ARTEFACT: designs_found=0 is a NEGATIVE-SEARCH LOG (not an independently checkable certificate)
+STATUS: COMPLETE (exhaustive; no node limit in this solver)
+exit=0
+elapsed_s=781

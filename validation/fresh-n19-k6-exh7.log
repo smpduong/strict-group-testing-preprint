@@ -1,0 +1,3 @@
+DONE n=19 k=6 q=3 pools[6,6] nodes=226207 cspcalls=877636 designs_found=0
+ARTEFACT: search log. 'designs_found=0' is a NEGATIVE-SEARCH LOG (not an independently checkable certificate); a FOUND line is a candidate POSITIVE WITNESS (dump it with `gt cert` and check it with search/verify.py)
+STATUS: COMPLETE (no node limit reached; node limit 2000000000)

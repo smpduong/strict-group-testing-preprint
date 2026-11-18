@@ -1,0 +1,38 @@
+[
+  {
+    "source": "search/gt.c",
+    "sha256_matches": true
+  },
+  {
+    "source": "search/exh2.c",
+    "sha256_matches": true
+  },
+  {
+    "source": "search/exh7.c",
+    "sha256_matches": true
+  },
+  {
+    "source": "search/cf.c",
+    "sha256_matches": true
+  },
+  {
+    "source": "independent/gt2.c",
+    "sha256_matches": true
+  },
+  {
+    "source": "independent/gt2p.c",
+    "sha256_matches": true
+  },
+  {
+    "source": "independent/auditor/core.hpp",
+    "sha256_matches": true
+  },
+  {
+    "source": "independent/auditor/mysearch.cpp",
+    "sha256_matches": true
+  },
+  {
+    "source": "independent/auditor/mycff.cpp",
+    "sha256_matches": true
+  }
+]

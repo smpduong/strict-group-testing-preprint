@@ -1,0 +1,44 @@
+==15==LeakSanitizer has encountered a fatal error.
+==15==HINT: For debugging, try setting environment variable LSAN_OPTIONS=verbosity=1:log_threads=1
+==15==HINT: LeakSanitizer does not work under ptrace (strace, gdb, etc)
+sanitizers: not available, boundary tests run without them
+== 1. node limit => UNKNOWN / INCOMPLETE
+PASS default limit: STATUS: COMPLETE, exit 0, nodes=1406, designs_found=0
+PASS tiny limit (3): STATUS: INCOMPLETE, exit 3, no 'STATUS: COMPLETE'
+(old-code contrast skipped: HEAD already contains the fix)
+PASS NEW code, limit 3, same instance: STATUS: INCOMPLETE, exit 3
+PASS exh7 tiny limit: INCOMPLETE, exit 3
+PASS n29/exh7 tiny limit: INCOMPLETE, exit 3
+PASS gt eval with limit 1: r=UNKNOWN printed, STATUS: INCOMPLETE
+PASS gt eval default limit: no UNKNOWN, STATUS: COMPLETE
+== 2. off-by-one at the maximum supported size (n = MAXN)
+PASS search/gt.c: n=MAXN boundary test clean (rc=0, no sanitizer report)
+PASS n29/gt.c: n=MAXN boundary test clean (rc=0, no sanitizer report)
+PASS n=MAXN+1 (25) is rejected with exit 2 instead of overflowing
+PASS independent/gt2.c at n=16 (its MAXN) under sanitizers: clean and STATUS printed
+PASS independent/gt2p.c at n=20 (its MAXN) under sanitizers: clean and STATUS printed
+== 4. certificate generator aborts when the stage-2 budget is too small
+PASS search/gt.c cert with sufficient budget (q=3): exit 0, certificate verifies
+PASS search/gt.c cert with too-small budget (q=2): nonzero exit, no certificate file
+PASS search/gt.c failed cert run deletes a stale certificate at the same path
+PASS search/gt.c cert with solver UNKNOWN (node limit 1): nonzero exit, no certificate
+PASS n29/gt.c cert with sufficient budget (q=3): exit 0, certificate verifies
+PASS n29/gt.c cert with too-small budget (q=2): nonzero exit, no certificate file
+PASS n29/gt.c failed cert run deletes a stale certificate at the same path
+PASS n29/gt.c cert with solver UNKNOWN (node limit 1): nonzero exit, no certificate
+== 3. verifiers
+PASS independent/verify.py rejects: k=0
+PASS independent/verify.py rejects: negative q
+FAILURES: 0
+PASS verifier tests (max_t enforcement, labels, sizes<=3 empirical)
+== 5. repro manifest
+manifest entries=25  logs matching=25  problems=0
+PASS every repro_logs/n19/MANIFEST.txt entry has a raw log with matching sha256
+== 6. gt2p work partitioning
+PASS GT2P_PROBE=1 counts split subtrees only
+== gt2p partition tests: 0 failure(s)
+PASS gt2p partition tests (sums over parts == unpartitioned run, positive controls)
+== 7. n26 wide build (MAXN 28, F9/PREFIX/REQ/NOSING) vs search/exh7.c and known results
+n26 PASS lines: 23
+PASS n26 validation tests (tests/test_n26.sh)
+== summary: 0 failure(s)
